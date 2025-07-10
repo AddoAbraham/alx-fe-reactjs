@@ -9,11 +9,3 @@ function WelcomeMessage() {
 }
 
 export default WelcomeMessage;
-
-function App() {
-  return (
-    <>
-      <WelcomeMessage />
-    </>
-  );
-}
