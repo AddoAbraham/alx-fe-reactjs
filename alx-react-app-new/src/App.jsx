@@ -1,3 +1,4 @@
+import Counter from "./components/Counter";
 import UserProfile from "./components/UserProfile";
 import Header from "./components/Header";
 import MainContent from "./components/MainContent";
@@ -19,6 +20,7 @@ function App() {
         <Header />
         <MainContent />
         <Footer />
+        <Counter />
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
