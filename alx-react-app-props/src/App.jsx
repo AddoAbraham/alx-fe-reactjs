@@ -12,7 +12,12 @@ import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
-  const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
+  const userData = {
+    name: "Jane Doe",
+    age: 30,
+    bio: "Loves hiking and photography",
+    email: "jane.doe@example.com",
+  };
   return (
     <>
       <div>
