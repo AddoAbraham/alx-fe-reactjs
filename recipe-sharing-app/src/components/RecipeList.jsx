@@ -1,4 +1,5 @@
-import { useRecipeStore } from "./recipeStore";
+import { Link } from "react-router-dom";
+import { useRecipeStore } from "../stores/recipeStore";
 
 const RecipeList = () => {
   const recipes = useRecipeStore((state) => state.recipes);
@@ -14,11 +15,19 @@ const RecipeList = () => {
             key={recipe.id}
             style={{
               border: "1px solid #ccc",
-              margin: "10px 0",
+              marginBottom: "15px",
               padding: "10px",
+              borderRadius: "6px",
             }}
           >
-            <h3>{recipe.title}</h3>
+            <h3>
+              <Link
+                to={`/recipe/${recipe.id}`}
+                style={{ textDecoration: "none", color: "#333" }}
+              >
+                {recipe.title}
+              </Link>
+            </h3>
             <p>{recipe.description}</p>
           </div>
         ))
