@@ -1,22 +1,22 @@
-import axios from "axios";
+// src/services/githubApi.js
 
-const BASE_URL = "https://api.github.com";
+export const advancedUserSearch = async (username, location, minRepos) => {
+  const queryParts = [];
 
-// Optional: If you have a GitHub API token in your `.env`
-const headers = import.meta.env.VITE_APP_GITHUB_API_KEY
-  ? {
-      Authorization: `Bearer ${import.meta.env.VITE_APP_GITHUB_API_KEY}`,
-    }
-  : {};
+  if (username) queryParts.push(`${username} in:login`);
+  if (location) queryParts.push(`location:${location}`);
+  if (minRepos) queryParts.push(`repos:>=${minRepos}`);
 
-export const searchUser = async (username) => {
-  try {
-    const response = await axios.get(`${BASE_URL}/users/${username}`, {
-      headers,
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching GitHub user:", error);
-    throw error;
+  const query = queryParts.join(" ");
+  const url = `https://api.github.com/search/users?q=${encodeURIComponent(
+    query
+  )}`;
+
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error("Failed to fetch users");
   }
+
+  const data = await response.json();
+  return data.items;
 };
