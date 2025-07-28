@@ -1,7 +1,8 @@
 // src/App.jsx
 
 import React from "react";
-import SearchBar from "./components/Search";
+import Search from "./components/Search";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   return (
