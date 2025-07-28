@@ -1,5 +1,3 @@
-// src/components/Search.jsx
-
 import React, { useState } from "react";
 import { searchUser } from "../services/githubApi";
 
@@ -7,12 +5,17 @@ const Search = () => {
   const [query, setQuery] = useState("");
   const [userData, setUserData] = useState(null);
 
-  const handleSearch = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent page reload
+
+    if (!query.trim()) return;
+
     try {
       const data = await searchUser(query);
       setUserData(data);
     } catch (err) {
       alert("User not found!");
+      setUserData(null);
     }
   };
 
@@ -21,7 +24,8 @@ const Search = () => {
       <h2 className="text-2xl font-bold text-center text-gray-800">
         Basic GitHub User Search
       </h2>
-      <div className="flex space-x-2">
+
+      <form onSubmit={handleSubmit} className="flex space-x-2">
         <input
           type="text"
           placeholder="Enter GitHub username"
@@ -30,12 +34,12 @@ const Search = () => {
           className="flex-1 border p-2 rounded"
         />
         <button
-          onClick={handleSearch}
+          type="submit"
           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
           Search
         </button>
-      </div>
+      </form>
 
       {userData && (
         <div className="p-4 border rounded shadow">
