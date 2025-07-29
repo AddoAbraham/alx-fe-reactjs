@@ -1,21 +1,34 @@
 import React, { useState } from "react";
-import { searchUser, advancedUserSearch } from "../services/githubService";
+import { advancedUserSearch, fetchUserData } from "../services/githubService";
 
 const Search = () => {
   const [query, setQuery] = useState("");
   const [location, setLocation] = useState("");
   const [minRepos, setMinRepos] = useState("");
   const [results, setResults] = useState([]);
+  const [singleUser, setSingleUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSearch = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setResults([]);
+    setSingleUser(null);
+    setError(null);
+
     try {
+      // Try advanced search first
       const users = await advancedUserSearch(query, location, minRepos);
-      setResults(users);
+      if (users.length > 0) {
+        setResults(users);
+      } else {
+        // If no results, fallback to exact username search
+        const user = await fetchUserData(query);
+        setSingleUser(user);
+      }
     } catch (err) {
-      alert("Search failed");
+      setError("Looks like we can't find the user");
     } finally {
       setLoading(false);
     }
@@ -57,6 +70,9 @@ const Search = () => {
         </button>
       </form>
 
+      {error && <p className="text-red-500 text-center">{error}</p>}
+
+      {/* Show multiple search results */}
       {results.length > 0 && (
         <div className="mt-6 space-y-4">
           {results.map((user) => (
@@ -82,6 +98,33 @@ const Search = () => {
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Show single exact match */}
+      {singleUser && (
+        <div className="mt-6 p-4 border rounded shadow">
+          <div className="flex items-center space-x-4">
+            <img
+              src={singleUser.avatar_url}
+              alt={singleUser.login}
+              className="w-16 h-16 rounded-full"
+            />
+            <div>
+              <h3 className="text-xl font-semibold">
+                {singleUser.name || singleUser.login}
+              </h3>
+              <p className="text-gray-600">{singleUser.bio}</p>
+              <a
+                href={singleUser.html_url}
+                target="_blank"
+                rel="noreferrer"
+                className="text-blue-500 hover:underline"
+              >
+                View Profile
+              </a>
+            </div>
+          </div>
         </div>
       )}
     </div>
