@@ -18,12 +18,10 @@ const Search = () => {
     setError(null);
 
     try {
-      // Try advanced search first
       const users = await advancedUserSearch(query, location, minRepos);
       if (users.length > 0) {
         setResults(users);
       } else {
-        // If no results, fallback to exact username search
         const user = await fetchUserData(query);
         setSingleUser(user);
       }
@@ -72,7 +70,6 @@ const Search = () => {
 
       {error && <p className="text-red-500 text-center">{error}</p>}
 
-      {/* Show multiple search results */}
       {results.length > 0 && (
         <div className="mt-6 space-y-4">
           {results.map((user) => (
@@ -101,7 +98,6 @@ const Search = () => {
         </div>
       )}
 
-      {/* Show single exact match */}
       {singleUser && (
         <div className="mt-6 p-4 border rounded shadow">
           <div className="flex items-center space-x-4">

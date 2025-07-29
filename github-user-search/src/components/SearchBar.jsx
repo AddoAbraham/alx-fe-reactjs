@@ -1,5 +1,3 @@
-// src/components/SearchBar.jsx
-
 import React, { useState } from "react";
 import { advancedUserSearch } from "../services/githubApi";
 

@@ -1,5 +1,3 @@
-// src/App.jsx
-
 import React from "react";
 import Search from "./components/Search";
 import SearchBar from "./components/SearchBar";

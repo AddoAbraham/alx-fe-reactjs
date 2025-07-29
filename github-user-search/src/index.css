@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Now your custom styles below */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

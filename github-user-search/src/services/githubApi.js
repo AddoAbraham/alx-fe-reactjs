@@ -1,5 +1,3 @@
-// src/services/githubApi.js
-
 export const advancedUserSearch = async (username, location, minRepos) => {
   const queryParts = [];
 

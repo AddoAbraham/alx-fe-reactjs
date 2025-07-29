@@ -3,7 +3,6 @@ import axios from "axios";
 const GITHUB_API_BASE = "https://api.github.com";
 const SEARCH_USERS_ENDPOINT = "https://api.github.com/search/users?q"; // Literal for validator
 
-// Basic search by username
 export const searchUser = async (username) => {
   try {
     const response = await axios.get(`${GITHUB_API_BASE}/users/${username}`);
@@ -13,10 +12,8 @@ export const searchUser = async (username) => {
   }
 };
 
-// Alias for basic user fetch
 export const fetchUserData = searchUser;
 
-// Advanced search with username, location, and minimum repositories
 export const advancedUserSearch = async (
   username = "",
   location = "",
