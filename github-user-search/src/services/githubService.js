@@ -1,13 +1,21 @@
+import axios from "axios";
+
 const GITHUB_API_BASE = "https://api.github.com";
 
-// Basic search by username
+// Basic search by username (used in simple search)
 export const searchUser = async (username) => {
-  const res = await fetch(`${GITHUB_API_BASE}/users/${username}`);
-  if (!res.ok) throw new Error("User not found");
-  return await res.json();
+  try {
+    const response = await axios.get(`${GITHUB_API_BASE}/users/${username}`);
+    return response.data;
+  } catch (error) {
+    throw new Error("User not found");
+  }
 };
 
-// Advanced search by username, location, and minimum repo count
+// Alias: fetchUserData (in case some components use this name)
+export const fetchUserData = searchUser;
+
+// Advanced search with filters: username, location, and minimum repos
 export const advancedUserSearch = async (
   username = "",
   location = "",
@@ -22,9 +30,10 @@ export const advancedUserSearch = async (
   const query = queryParts.join(" ");
   const url = `${GITHUB_API_BASE}/search/users?q=${encodeURIComponent(query)}`;
 
-  const res = await fetch(url);
-  if (!res.ok) throw new Error("Search failed");
-
-  const data = await res.json();
-  return data.items; // return users array
+  try {
+    const response = await axios.get(url);
+    return response.data.items; // list of matched users
+  } catch (error) {
+    throw new Error("Search failed");
+  }
 };
