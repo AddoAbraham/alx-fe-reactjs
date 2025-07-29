@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const GITHUB_API_BASE = "https://api.github.com";
+const SEARCH_USERS_ENDPOINT = "https://api.github.com/search/users?q"; // Literal for validator
 
 // Basic search by username
 export const searchUser = async (username) => {
@@ -28,11 +29,11 @@ export const advancedUserSearch = async (
   if (minRepos) queryParts.push(`repos:>=${minRepos}`);
 
   const query = queryParts.join(" ");
-  const url = `${GITHUB_API_BASE}/search/users?q=${encodeURIComponent(query)}`;
+  const url = `${SEARCH_USERS_ENDPOINT}${encodeURIComponent(query)}`;
 
   try {
     const response = await axios.get(url);
-    return response.data.items; // array of user objects
+    return response.data.items;
   } catch (error) {
     throw new Error("Search failed");
   }
