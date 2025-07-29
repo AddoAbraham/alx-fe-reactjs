@@ -2,7 +2,7 @@ import axios from "axios";
 
 const GITHUB_API_BASE = "https://api.github.com";
 
-// Basic search by username (used in simple search)
+// Basic search by username
 export const searchUser = async (username) => {
   try {
     const response = await axios.get(`${GITHUB_API_BASE}/users/${username}`);
@@ -12,16 +12,16 @@ export const searchUser = async (username) => {
   }
 };
 
-// Alias: fetchUserData (in case some components use this name)
+// Alias for basic user fetch
 export const fetchUserData = searchUser;
 
-// Advanced search with filters: username, location, and minimum repos
+// Advanced search with username, location, and minimum repositories
 export const advancedUserSearch = async (
   username = "",
   location = "",
   minRepos = ""
 ) => {
-  let queryParts = [];
+  const queryParts = [];
 
   if (username) queryParts.push(`${username} in:login`);
   if (location) queryParts.push(`location:${location}`);
@@ -32,7 +32,7 @@ export const advancedUserSearch = async (
 
   try {
     const response = await axios.get(url);
-    return response.data.items; // list of matched users
+    return response.data.items; // array of user objects
   } catch (error) {
     throw new Error("Search failed");
   }
