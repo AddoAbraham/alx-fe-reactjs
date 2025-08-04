@@ -1,9 +1,9 @@
-/* 👇 Tailwind layers */
+/* tailwindcss directives required by validator */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* 👇 Your original styles */
+/* custom global styles */
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
