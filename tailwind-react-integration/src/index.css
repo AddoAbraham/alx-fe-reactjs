@@ -1,7 +1,6 @@
 /* tailwindcss directives required by validator */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
 
 /* custom global styles */
 
