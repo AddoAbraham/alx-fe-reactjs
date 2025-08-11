@@ -3,18 +3,58 @@
     "id": 1,
     "title": "Spaghetti Carbonara",
     "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-    "image": "https://via.placeholder.com/300x200"
+    "image": "https://via.placeholder.com/300x200",
+    "ingredients": [
+      "200g spaghetti",
+      "2 eggs",
+      "100g bacon",
+      "50g parmesan cheese",
+      "Black pepper"
+    ],
+    "instructions": [
+      "Cook the spaghetti according to the package instructions.",
+      "Fry the bacon until crispy.",
+      "Beat the eggs and mix with grated parmesan.",
+      "Drain the pasta and mix with bacon and egg-cheese mixture.",
+      "Season with black pepper and serve."
+    ]
   },
   {
     "id": 2,
     "title": "Chicken Tikka Masala",
     "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
-    "image": "https://via.placeholder.com/300x200"
+    "image": "https://via.placeholder.com/300x200",
+    "ingredients": [
+      "500g chicken breast",
+      "1 cup yogurt",
+      "2 tbsp tikka masala paste",
+      "200ml tomato puree",
+      "200ml cream"
+    ],
+    "instructions": [
+      "Marinate chicken in yogurt and tikka masala paste for at least 1 hour.",
+      "Grill the chicken until cooked.",
+      "In a pan, heat tomato puree and add cream.",
+      "Add the cooked chicken to the sauce and simmer for 10 minutes.",
+      "Serve with rice or naan bread."
+    ]
   },
   {
     "id": 3,
     "title": "Avocado Toast",
     "summary": "Crispy bread topped with smashed avocado, a pinch of salt, and fresh herbs.",
-    "image": "https://via.placeholder.com/300x200"
+    "image": "https://via.placeholder.com/300x200",
+    "ingredients": [
+      "2 slices of bread",
+      "1 ripe avocado",
+      "Pinch of salt",
+      "Fresh herbs (optional)"
+    ],
+    "instructions": [
+      "Toast the bread slices until crispy.",
+      "Mash the avocado with a fork and season with salt.",
+      "Spread the mashed avocado on the toasted bread.",
+      "Top with fresh herbs if desired and serve immediately."
+    ]
   }
 ]

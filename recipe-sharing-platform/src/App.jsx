@@ -1,5 +1,7 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import HomePage from "./components/HomePage";
+import RecipeDetail from "./components/RecipeDetail";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -8,7 +10,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <>
+    <Router>
       {/* Tailwind test heading */}
       <div className="p-6">
         <h1 className="text-3xl font-bold text-blue-500">
@@ -41,9 +43,12 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
 
-      {/* Home Page */}
-      <HomePage />
-    </>
+      {/* Routes */}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/recipe/:id" element={<RecipeDetail />} />
+      </Routes>
+    </Router>
   );
 }
 

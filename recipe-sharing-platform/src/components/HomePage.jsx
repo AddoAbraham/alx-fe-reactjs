@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const [recipes, setRecipes] = useState([]);
@@ -16,7 +17,7 @@ function HomePage() {
         Recipe Sharing Platform
       </h1>
 
-      {/* Added grid-cols-1 for mobile default */}
+      {/* Responsive layout with grid-cols-1 as default */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {recipes.map((recipe) => (
           <div
@@ -31,12 +32,12 @@ function HomePage() {
             <div className="p-4">
               <h2 className="text-2xl font-semibold mb-2">{recipe.title}</h2>
               <p className="text-gray-600">{recipe.summary}</p>
-              <a
-                href={`/recipes/${recipe.id}`}
+              <Link
+                to={`/recipe/${recipe.id}`}
                 className="mt-4 inline-block text-green-500 hover:text-green-700 font-medium"
               >
                 View Recipe →
-              </a>
+              </Link>
             </div>
           </div>
         ))}
