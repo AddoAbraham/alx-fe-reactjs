@@ -1,4 +1,5 @@
 import { useState } from "react";
+import HomePage from "./components/HomePage";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -8,12 +9,15 @@ function App() {
 
   return (
     <>
+      {/* Tailwind test heading */}
       <div className="p-6">
         <h1 className="text-3xl font-bold text-blue-500">
           Recipe Sharing Platform
         </h1>
         <p className="text-gray-600">Tailwind is working 🎉</p>
       </div>
+
+      {/* Logos */}
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -22,6 +26,8 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
+
+      {/* Counter */}
       <h1>Vite + React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
@@ -34,6 +40,9 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+
+      {/* Home Page */}
+      <HomePage />
     </>
   );
 }
