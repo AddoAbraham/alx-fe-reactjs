@@ -17,7 +17,17 @@ function HomePage() {
         Recipe Sharing Platform
       </h1>
 
-      {/* Responsive layout with grid-cols-1 as default */}
+      {/* Add New Recipe button */}
+      <div className="flex justify-center mb-6">
+        <Link
+          to="/add"
+          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-200"
+        >
+          Add New Recipe
+        </Link>
+      </div>
+
+      {/* Recipes Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {recipes.map((recipe) => (
           <div
