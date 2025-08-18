@@ -1,64 +1,62 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { Routes, Route, Link } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import { QueryClient, QueryClientProvider } from "react-query";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Profile from "./pages/Profile";
+import BlogPost from "./pages/BlogPost";
+import ProtectedRoute from "./components/ProtectedRoute";
 import PostsComponent from "./components/PostsComponent";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000,
+      gcTime: 5 * 60 * 1000,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
-function App() {
-  const [count, setCount] = useState(0);
+export default function App() {
   const [showPosts, setShowPosts] = useState(true);
 
   return (
     <QueryClientProvider client={queryClient}>
       <div>
-        <div>
-          <a href="https://vite.dev" target="_blank">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
-        </div>
-
-        <h1>Vite + React + React Query</h1>
-
-        <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test HMR
-          </p>
-        </div>
-
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
-
-        <hr style={{ margin: "1rem 0" }} />
-
-        <div style={{ padding: "1rem" }}>
-          <h2>React Query Demo</h2>
-          <p>
-            Toggle the component to unmount/remount and observe instant cached
-            data (no network) if within <code>staleTime</code>.
-          </p>
-
+        <nav style={{ padding: "1rem", background: "#eee" }}>
+          <Link to="/">Home</Link> | <Link to="/about">About</Link> |{" "}
+          <Link to="/profile">Profile</Link> |{" "}
+          <Link to="/posts/1">Blog Post #1</Link> |{" "}
           <button onClick={() => setShowPosts((s) => !s)}>
             {showPosts ? "Hide" : "Show"} Posts
           </button>
+        </nav>
 
-          <hr style={{ margin: "1rem 0" }} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
 
-          {showPosts ? <PostsComponent /> : <p>Posts component unmounted.</p>}
-        </div>
+          <Route
+            path="/profile/*"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route path="/posts/:postId" element={<BlogPost />} />
+        </Routes>
+
+        <hr style={{ margin: "1rem 0" }} />
+        <h2>React Query Demo</h2>
+        {showPosts ? <PostsComponent /> : <p>Posts component unmounted.</p>}
       </div>
+
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
-
-export default App;
