@@ -1,58 +1,40 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "react-query";
 
 async function fetchPosts() {
   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-  if (!res.ok) throw new Error("Failed to fetch posts");
+  if (!res.ok) {
+    throw new Error("Network response was not ok");
+  }
   return res.json();
 }
 
 export default function PostsComponent() {
-  const queryClient = useQueryClient();
+  const { data, isLoading, isError, error, refetch, isFetching } = useQuery(
+    "posts",
+    fetchPosts,
+    {
+      staleTime: 5000,
+      cacheTime: 1000 * 60 * 5,
+    }
+  );
 
-  const { data, error, isLoading, isFetching, refetch, status } = useQuery({
-    queryKey: ["posts"],
-    queryFn: fetchPosts,
-
-    select: (posts) => posts.slice(0, 10),
-  });
-
-  if (isLoading) return <p>Loading posts…</p>;
-  if (error) return <p>Oops: {error.message}</p>;
+  if (isLoading) return <p>Loading posts...</p>;
+  if (isError) return <p style={{ color: "red" }}>Error: {error.message}</p>;
 
   return (
-    <div style={{ maxWidth: 700, margin: "1rem auto" }}>
-      <h2>Posts (first 10)</h2>
-
-      <div
-        style={{
-          display: "flex",
-          gap: 8,
-          alignItems: "center",
-          margin: "0.5rem 0",
-        }}
-      >
-        <button onClick={() => refetch()}>Refetch now</button>
-        <button
-          onClick={() => queryClient.invalidateQueries({ queryKey: ["posts"] })}
-        >
-          Invalidate cache (next render refetches)
-        </button>
-        {isFetching && <span>Updating…</span>}
-      </div>
-
+    <div>
+      <h3>Posts</h3>
+      <button onClick={() => refetch()} disabled={isFetching}>
+        {isFetching ? "Refreshing..." : "Refetch Posts"}
+      </button>
       <ul>
-        {data.map((p) => (
-          <li key={p.id}>
-            <strong>{p.title}</strong>
-            <p style={{ marginTop: 4 }}>{p.body}</p>
+        {data.slice(0, 10).map((post) => (
+          <li key={post.id}>
+            <strong>{post.title}</strong>
+            <p>{post.body}</p>
           </li>
         ))}
       </ul>
-
-      <p style={{ fontSize: 12, opacity: 0.7 }}>
-        Status: <code>{status}</code> | From cache when remounted if still
-        fresh.
-      </p>
     </div>
   );
 }
