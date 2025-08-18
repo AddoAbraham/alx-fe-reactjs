@@ -8,8 +8,8 @@ import Home from "./Pages/Home";
 import About from "./Pages/About";
 import BlogPost from "./Pages/BlogPost";
 import Profile from "./components/Profile";
-import ProfileDetails from "./Pages/ProfileDetails";
-import ProfileSettings from "./Pages/ProfileSettings";
+import ProfileDetails from "./components/ProfileDetails";
+import ProfileSettings from "./components/ProfileSettings";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
