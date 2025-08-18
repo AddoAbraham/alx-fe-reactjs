@@ -7,7 +7,7 @@ import "./App.css";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import BlogPost from "./Pages/BlogPost";
-import Profile from "./Pages/Profile";
+import Profile from "./components/Profile";
 import ProfileDetails from "./Pages/ProfileDetails";
 import ProfileSettings from "./Pages/ProfileSettings";
 import ProtectedRoute from "./components/ProtectedRoute";

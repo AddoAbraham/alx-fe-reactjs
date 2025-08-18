@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 
 export default function Profile() {
   return (
@@ -7,6 +7,7 @@ export default function Profile() {
       <nav>
         <Link to="details">Details</Link> | <Link to="settings">Settings</Link>
       </nav>
+
       <Outlet />
     </div>
   );
