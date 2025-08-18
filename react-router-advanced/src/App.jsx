@@ -39,7 +39,7 @@ export default function App() {
         <nav style={{ padding: "1rem", background: "#eee" }}>
           <Link to="/">Home</Link> | <Link to="/about">About</Link> |{" "}
           <Link to="/profile">Profile</Link> |{" "}
-          <Link to="/posts/1">Blog Post #1</Link>
+          <Link to="/blog/1">Blog Post #1</Link>
         </nav>
 
         <Routes>
@@ -58,7 +58,7 @@ export default function App() {
             <Route path="settings" element={<ProfileSettings />} />
           </Route>
 
-          <Route path="/posts/:postId" element={<BlogPost />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
         </Routes>
       </div>
     </BrowserRouter>
