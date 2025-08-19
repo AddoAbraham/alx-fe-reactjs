@@ -8,9 +8,7 @@ function TodoList() {
   ]);
 
   const addTodo = (text) => {
-    if (!text.trim()) return;
-    const newTodo = { id: Date.now(), text, completed: false };
-    setTodos([...todos, newTodo]);
+    setTodos([...todos, { id: Date.now(), text, completed: false }]);
   };
 
   const toggleTodo = (id) => {
@@ -34,13 +32,17 @@ function TodoList() {
           <li
             key={todo.id}
             onClick={() => toggleTodo(todo.id)}
-            style={{
-              cursor: "pointer",
-              textDecoration: todo.completed ? "line-through" : "none",
-            }}
+            style={{ textDecoration: todo.completed ? "line-through" : "none" }}
           >
             {todo.text}
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteTodo(todo.id);
+              }}
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>
