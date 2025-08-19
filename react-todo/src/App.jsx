@@ -8,6 +8,9 @@ import TodoList from "./components/TodoList";
 function App() {
   const [count, setCount] = useState(0);
 
+  // Example todos (these will show up in the UI)
+  const todos = ["Learn React", "Build a Todo App", "Write Tests"];
+
   return (
     <>
       <div>
@@ -33,7 +36,8 @@ function App() {
 
       <div style={{ marginTop: "2rem" }}>
         <h2>Todo List</h2>
-        <TodoList />
+        {/* Pass todos as props */}
+        <TodoList todos={todos} />
       </div>
     </>
   );
