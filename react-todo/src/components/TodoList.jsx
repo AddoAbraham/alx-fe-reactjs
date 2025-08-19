@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
-const TodoList = ({ todos }) => {
-  if (!todos || todos.length === 0) {
-    return <p>No todos available</p>;
-  }
+const TodoList = () => {
+  const [todos, setTodos] = useState([
+    "Learn React",
+    "Build a Todo App",
+    "Write Tests",
+  ]);
 
   return (
-    <ul>
-      {todos.map((todo, index) => (
-        <li key={index}>{todo}</li>
-      ))}
-    </ul>
+    <div>
+      {todos.length === 0 ? (
+        <p>No todos available</p>
+      ) : (
+        <ul>
+          {todos.map((todo, index) => (
+            <li key={index}>{todo}</li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 };
 
